@@ -1,4 +1,4 @@
-namespace AOC2024.Utility;
+namespace Utility;
 
 public class SetupInputFile
 {

@@ -2,7 +2,7 @@ using Utility;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace AOC2024;
+namespace AOC2015;
 
 public class TestProblems
 {
@@ -17,7 +17,7 @@ public class TestProblems
   {
     var fileHandler = new SetupInputFile();
     string path = SetupInputFile.GetSolutionDirectory();
-    string testDataFile = Path.Combine(path, "AOC2024", "Answers", "TestData.txt");
+    string testDataFile = Path.Combine(path, "AOC2015", "Answers", "TestData.txt");
 
     var lines = File.ReadAllLines(testDataFile).Skip(1) // Skip header row
       .Where(line => !string.IsNullOrWhiteSpace(line));
@@ -33,8 +33,9 @@ public class TestProblems
   [Theory]
   [MemberData(nameof(GetTestCases))]
   public void TestPart1(string dayStr, string expectedAnswer1, string _)
-  { int day = int.Parse(dayStr);
-    int year = 2024;
+  {
+    int day = int.Parse(dayStr);
+    int year = 2015;
     string filePart1 = TestFiles.GetInputData(day,year, "Part1Example.txt");
 
     Type? dayType = Type.GetType($"AOC{year}.Day{day}");
@@ -42,7 +43,6 @@ public class TestProblems
     {
       throw new InvalidOperationException($"Type AOC{year}.Day{day} not found.");
     }
-
     object? dayInstance = Activator.CreateInstance(dayType);
     var methodInfo = dayType.GetMethod("Process");
     if (methodInfo == null)
@@ -61,8 +61,9 @@ public class TestProblems
   [MemberData(nameof(GetTestCases))]
   public void TestPart2(string dayStr, string _, string expectedAnswer2)
   {
+
     int day = int.Parse(dayStr);
-    int year = 2024;
+    int year = 2015;
     string filePart2 = TestFiles.GetInputData(day,year, "Part2Example.txt");
 
     Type? dayType = Type.GetType($"AOC{year}.Day{day}");
@@ -70,7 +71,6 @@ public class TestProblems
     {
       throw new InvalidOperationException($"Type AOC{year}.Day{day} not found.");
     }
-
     object? dayInstance = Activator.CreateInstance(dayType);
     var methodInfo = dayType.GetMethod("Process");
     if (methodInfo == null)

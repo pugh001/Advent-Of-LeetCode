@@ -9,7 +9,7 @@ using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AOC2024.Utility;
+namespace Utility;
 
 public enum CompassDirection
 {

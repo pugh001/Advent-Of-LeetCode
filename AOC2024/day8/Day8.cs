@@ -1,4 +1,4 @@
-using AOC2024.Utility;
+using Utility;
 
 namespace AOC2024;
 

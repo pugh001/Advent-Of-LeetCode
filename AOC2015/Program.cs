@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Utility;
 
-namespace AOC2024;
+namespace AOC2015;
 
 static internal class Program
 {
@@ -11,9 +11,9 @@ static internal class Program
     {
       try
       {
-        string inputFilePath = TestFiles.GetInputData(day, 2024,"puzzleInput.txt");
+        string inputFilePath = TestFiles.GetInputData(day, 2015, "puzzleInput.txt");
         object? dayInstance =
-          Activator.CreateInstance(Type.GetType($"AOC2024.Day{day}") ?? throw new InvalidOperationException());
+          Activator.CreateInstance(Type.GetType($"AOC2015.Day{day}") ?? throw new InvalidOperationException());
         Console.WriteLine("");
         Console.Write("Day " + day.ToString().PadLeft(2, ' ') + ":");
         var stopWatch = Stopwatch.StartNew(); 
