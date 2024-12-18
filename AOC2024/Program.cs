@@ -1,4 +1,5 @@
-﻿using AOC2024.Utility;
+﻿using System.Diagnostics;
+using AOC2024.Utility;
 
 namespace AOC2024;
 
@@ -15,9 +16,10 @@ static internal class Program
           Activator.CreateInstance(Type.GetType($"AOC2024.Day{day}") ?? throw new InvalidOperationException());
         Console.WriteLine("");
         Console.Write("Day " + day.ToString().PadLeft(2, ' ') + ":");
-        var startTime = DateTime.Now;
+        var stopWatch = Stopwatch.StartNew(); 
         Console.Write(dayInstance.GetType().GetMethod("Process").Invoke(dayInstance, new object[] { inputFilePath }));
-        Console.Write("  Time: " + DateTime.Now.Subtract(startTime));
+        stopWatch.Stop();
+        Console.Write($"  Time:  {stopWatch.Elapsed}");
       }
       catch (InvalidOperationException)
       {
