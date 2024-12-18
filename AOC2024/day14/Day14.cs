@@ -5,13 +5,19 @@ namespace AOC2024;
 
 public class Day14
 {
-  private static readonly int _xMax = 101;
-  private static readonly int _yMax = 103;
+  private static  int _xMax = 101;
+  private static  int _yMax = 103;
   private static readonly int[,] Grid = new int[_xMax, _yMax];
   private static readonly List<((int, int), (int, int))> robots = new();
   private static Dictionary<(int, int), int> robotTree = new();
   public static (string, string) Process(string input)
   {
+    if (input.Contains("Example"))
+    {
+      _xMax = 11;
+      _yMax = 7;
+    }
+
     Array.Clear(Grid, 0, Grid.Length);
     long result1 = 0, result2 = 0;
     var data = SetupInputFile.OpenFile(input);
@@ -30,13 +36,18 @@ public class Day14
       }
     }
 
-    result2 = processPart2();
-    result1 = 0; //processPart1(data);
+    if (!input.Contains("Example"))
+    {
+      result2 = processPart2();
+      return ("", result2.ToString());
+    }
+
+    result1 = processPart1(data);
 
 
     return (result1.ToString(), result2.ToString());
   }
-  /*
+  
     private static long processPart1(IEnumerable<string> data)
     {
       var regex = new Regex(@"p=(\d+),(\d+) v=(-?\d+),(-?\d+)");
@@ -78,7 +89,7 @@ public class Day14
       return quad1 * quad2 * quad3 * quad4;
 
     }
-   */
+   
   private static long processPart2()
   {
     long sum = 0;

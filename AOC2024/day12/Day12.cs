@@ -63,7 +63,6 @@ public class Day12
         {
           (int area, int measure) = calculateRegion(grid, visited, r, c);
           totalCost += area * measure;
-          //Console.WriteLine(area + "|" + measure);
         }
       }
     }

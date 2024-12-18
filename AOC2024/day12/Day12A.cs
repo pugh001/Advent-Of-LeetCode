@@ -106,7 +106,7 @@ public class Day12A
       }
     }
 
-    (int measureArea, int measureValue) = measureCalculator(grid, regionCells);
+    (int _, int measureValue) = measureCalculator(grid, regionCells);
     return (area, measureValue);
   }
 
