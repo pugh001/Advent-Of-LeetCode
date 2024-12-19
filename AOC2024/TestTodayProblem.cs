@@ -33,11 +33,12 @@ public class TestProblems
   [Theory]
   [MemberData(nameof(GetTestCases))]
   public void TestPart1(string dayStr, string expectedAnswer1, string _)
-  { int day = int.Parse(dayStr);
+  {
+    int day = int.Parse(dayStr);
     int year = 2024;
-    string filePart1 = TestFiles.GetInputData(day,year, "Part1Example.txt");
+    string filePart1 = TestFiles.GetInputData(day, year, "Part1Example.txt");
 
-    Type? dayType = Type.GetType($"AOC{year}.Day{day}");
+    var dayType = Type.GetType($"AOC{year}.Day{day}");
     if (dayType == null)
     {
       throw new InvalidOperationException($"Type AOC{year}.Day{day} not found.");
@@ -63,9 +64,9 @@ public class TestProblems
   {
     int day = int.Parse(dayStr);
     int year = 2024;
-    string filePart2 = TestFiles.GetInputData(day,year, "Part2Example.txt");
+    string filePart2 = TestFiles.GetInputData(day, year, "Part2Example.txt");
 
-    Type? dayType = Type.GetType($"AOC{year}.Day{day}");
+    var dayType = Type.GetType($"AOC{year}.Day{day}");
     if (dayType == null)
     {
       throw new InvalidOperationException($"Type AOC{year}.Day{day} not found.");

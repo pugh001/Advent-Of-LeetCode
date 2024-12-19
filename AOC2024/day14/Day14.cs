@@ -5,8 +5,8 @@ namespace AOC2024;
 
 public class Day14
 {
-  private static  int _xMax = 101;
-  private static  int _yMax = 103;
+  private static int _xMax = 101;
+  private static int _yMax = 103;
   private static readonly int[,] Grid = new int[_xMax, _yMax];
   private static readonly List<((int, int), (int, int))> robots = new();
   private static Dictionary<(int, int), int> robotTree = new();
@@ -47,49 +47,49 @@ public class Day14
 
     return (result1.ToString(), result2.ToString());
   }
-  
-    private static long processPart1(IEnumerable<string> data)
+
+  private static long processPart1(IEnumerable<string> data)
+  {
+    var regex = new Regex(@"p=(\d+),(\d+) v=(-?\d+),(-?\d+)");
+
+    foreach (string line in data)
     {
-      var regex = new Regex(@"p=(\d+),(\d+) v=(-?\d+),(-?\d+)");
-
-      foreach (string line in data)
+      var match = regex.Match(line);
+      if (match.Success)
       {
-        var match = regex.Match(line);
-        if (match.Success)
-        {
 
-          long x = (long.Parse(match.Groups[1].Value) + long.Parse(match.Groups[3].Value) * 100) % _xMax;
-          long y = (long.Parse(match.Groups[2].Value) + long.Parse(match.Groups[4].Value) * 100) % _yMax;
-          if (x < 0) x += _xMax;
-          if (y < 0) y += _yMax;
-          Grid[x, y]++;
-        }
+        long x = (long.Parse(match.Groups[1].Value) + long.Parse(match.Groups[3].Value) * 100) % _xMax;
+        long y = (long.Parse(match.Groups[2].Value) + long.Parse(match.Groups[4].Value) * 100) % _yMax;
+        if (x < 0) x += _xMax;
+        if (y < 0) y += _yMax;
+        Grid[x, y]++;
       }
-
-
-      int Qx = _xMax / 2, Qy = _yMax / 2;
-      int quad1 = 0, quad2 = 0, quad3 = 0, quad4 = 0;
-
-      for (int i = 0; i < _xMax; i++)
-      {
-        if (i == Qx) continue;
-
-        for (int j = 0; j < _yMax; j++)
-        {
-          if (j == Qy) continue;
-
-          if (i < Qx && j < Qy) quad1 += Grid[i, j];
-          else if (i > Qx && j < Qy) quad2 += Grid[i, j];
-          else if (i < Qx && j > Qy) quad3 += Grid[i, j];
-          else if (i > Qx && j > Qy) quad4 += Grid[i, j];
-        }
-      }
-
-
-      return quad1 * quad2 * quad3 * quad4;
-
     }
-   
+
+
+    int Qx = _xMax / 2, Qy = _yMax / 2;
+    int quad1 = 0, quad2 = 0, quad3 = 0, quad4 = 0;
+
+    for (int i = 0; i < _xMax; i++)
+    {
+      if (i == Qx) continue;
+
+      for (int j = 0; j < _yMax; j++)
+      {
+        if (j == Qy) continue;
+
+        if (i < Qx && j < Qy) quad1 += Grid[i, j];
+        else if (i > Qx && j < Qy) quad2 += Grid[i, j];
+        else if (i < Qx && j > Qy) quad3 += Grid[i, j];
+        else if (i > Qx && j > Qy) quad4 += Grid[i, j];
+      }
+    }
+
+
+    return quad1 * quad2 * quad3 * quad4;
+
+  }
+
   private static long processPart2()
   {
     long sum = 0;

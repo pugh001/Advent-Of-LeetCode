@@ -7,16 +7,16 @@ static internal class Program
 {
   public static void Main(string[] args)
   {
-    for (int day = 18; day > 0; day--)
+    for (int day = 25; day > 0; day--)
     {
       try
       {
-        string inputFilePath = TestFiles.GetInputData(day, 2024,"puzzleInput.txt");
+        string inputFilePath = TestFiles.GetInputData(day, 2024, "puzzleInput.txt");
         object? dayInstance =
           Activator.CreateInstance(Type.GetType($"AOC2024.Day{day}") ?? throw new InvalidOperationException());
         Console.WriteLine("");
         Console.Write("Day " + day.ToString().PadLeft(2, ' ') + ":");
-        var stopWatch = Stopwatch.StartNew(); 
+        var stopWatch = Stopwatch.StartNew();
         Console.Write(dayInstance.GetType().GetMethod("Process").Invoke(dayInstance, new object[] { inputFilePath }));
         stopWatch.Stop();
         Console.Write($"  Time:  {stopWatch.Elapsed}");

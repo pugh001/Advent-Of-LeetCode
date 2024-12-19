@@ -8,9 +8,10 @@ public class Day18
 
   private static int _rows = 70;
   private static int _cols = 70;
-  private static readonly HashSet<(int, int)> Grid = []; // Stores corrupted locations (#)
-  private static readonly List<(int, int)> ExtraList = [];
   private static int _enough = 1024;
+  private static HashSet<(int, int)> Grid = []; // Stores corrupted locations (#)
+  private static List<(int, int)> ExtraList = [];
+
 
   private static readonly (int, int)[] Directions =
   [
@@ -27,7 +28,10 @@ public class Day18
       _rows = 6;
       _cols = 6;
       _enough = 12;
+      Grid = []; // Stores corrupted locations (#)
+      ExtraList = [];
     }
+
     // Load and parse input data
     string[] data = SetupInputFile.OpenFile(input).ToArray();
 

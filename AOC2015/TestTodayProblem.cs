@@ -36,13 +36,14 @@ public class TestProblems
   {
     int day = int.Parse(dayStr);
     int year = 2015;
-    string filePart1 = TestFiles.GetInputData(day,year, "Part1Example.txt");
+    string filePart1 = TestFiles.GetInputData(day, year, "Part1Example.txt");
 
-    Type? dayType = Type.GetType($"AOC{year}.Day{day}");
+    var dayType = Type.GetType($"AOC{year}.Day{day}");
     if (dayType == null)
     {
       throw new InvalidOperationException($"Type AOC{year}.Day{day} not found.");
     }
+
     object? dayInstance = Activator.CreateInstance(dayType);
     var methodInfo = dayType.GetMethod("Process");
     if (methodInfo == null)
@@ -64,13 +65,14 @@ public class TestProblems
 
     int day = int.Parse(dayStr);
     int year = 2015;
-    string filePart2 = TestFiles.GetInputData(day,year, "Part2Example.txt");
+    string filePart2 = TestFiles.GetInputData(day, year, "Part2Example.txt");
 
-    Type? dayType = Type.GetType($"AOC{year}.Day{day}");
+    var dayType = Type.GetType($"AOC{year}.Day{day}");
     if (dayType == null)
     {
       throw new InvalidOperationException($"Type AOC{year}.Day{day} not found.");
     }
+
     object? dayInstance = Activator.CreateInstance(dayType);
     var methodInfo = dayType.GetMethod("Process");
     if (methodInfo == null)
