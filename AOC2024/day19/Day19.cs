@@ -4,18 +4,18 @@ namespace AOC2024;
 
 public class Day19
 {
-  private static long _Part2counter;
+  private static long _part2Counter;
   private static List<string> _pattern = [];
   private static List<string> _towels = [];
   private static Dictionary<string, bool> _repeats = new(); //day 11 learning! :-)
   private static Dictionary<string, long> _repeatsCount = new(); //day 11 learning! :-)
 
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
 
     if (input.Contains("Example"))
     {
-      _Part2counter = 0;
+      _part2Counter = 0;
       _repeats = new Dictionary<string, bool>();
       _repeatsCount = new Dictionary<string, long>();
       _pattern = new List<string>();
@@ -27,17 +27,17 @@ public class Day19
 
     // Initialize grid based on the input
     InitializeGrid(data);
-    long countPatterns = processTowels();
-    return (countPatterns.ToString(), _Part2counter.ToString());
+    long countPatterns = ProcessTowels();
+    return (countPatterns.ToString(), _part2Counter.ToString());
 
   }
-  private static long processTowels()
+  private static long ProcessTowels()
   {
     long countPossible = 0;
     foreach (string currentPattern in _pattern)
     {
       if (IsPossible(currentPattern)) countPossible++;
-      _Part2counter += CountPossible(currentPattern);
+      _part2Counter += CountPossible(currentPattern);
     }
 
     return countPossible;
@@ -57,17 +57,15 @@ public class Day19
 
     foreach (string t in _towels)
     {
-      if (design.StartsWith(t))
-      {
-        string remainDesign = design[t.Length..];
-        if (IsPossible(remainDesign))
-        {
-          _repeats[remainDesign] = true;
-          return true;
-        }
+      if (!design.StartsWith(t))
+        continue;
 
-      }
+      string remainDesign = design[t.Length..];
+      if (!IsPossible(remainDesign))
+        continue;
 
+      _repeats[remainDesign] = true;
+      return true;
     }
 
     _repeats[design] = false;
@@ -80,19 +78,13 @@ public class Day19
       return 1;
     }
 
-    if (_repeatsCount.ContainsKey(design)) return _repeatsCount[design];
+    if (_repeatsCount.TryGetValue(design, out long possible)) return possible;
 
-    long ways = 0;
-    foreach (string t in _towels)
-    {
-      if (design.StartsWith(t))
-      {
-        string remainDesign = design[t.Length..];
-        ways += CountPossible(remainDesign);
-
-      }
-
-    }
+    long ways = (from t in _towels
+                 where design.StartsWith(t)
+                 select design[t.Length..]
+                 into remainDesign
+                 select CountPossible(remainDesign)).Sum();
 
     _repeatsCount[design] = ways;
     return ways;

@@ -10,7 +10,7 @@ public class Day14
   private static readonly int[,] Grid = new int[_xMax, _yMax];
   private static readonly List<((int, int), (int, int))> robots = new();
   private static Dictionary<(int, int), int> robotTree = new();
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     if (input.Contains("Example"))
     {

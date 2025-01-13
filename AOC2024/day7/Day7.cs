@@ -6,7 +6,7 @@ public class Day7
 {
   private static char[] _operators = null!;
 
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     // Load and parse input data
     string[] data = SetupInputFile.OpenFile(input).ToArray();

@@ -5,7 +5,7 @@ namespace AOC2024;
 
 public class Day13
 {
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     long result1 = 0, result2 = 0;
     var data = SetupInputFile.OpenFile(input);

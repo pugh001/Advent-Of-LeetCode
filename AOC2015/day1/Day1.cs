@@ -2,9 +2,9 @@ using Utility;
 
 namespace AOC2015;
 
-public class Day1
+public class Day1 : IDay
 {
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     string? data = SetupInputFile.OpenFile(input).First();
     int bracketsClose = data.Count(x => x == ')');

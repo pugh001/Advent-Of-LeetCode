@@ -5,7 +5,7 @@ namespace AOC2015;
 
 public class Day2
 {
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     int result1 = 0;
     int result2 = 0;
@@ -23,7 +23,7 @@ public class Day2
         int side2 = w * h;
         int side3 = h * l;
         int minSide = Math.Min(side1, Math.Min(side2, side3));
-        result1 += (side1 * 2) + (side2 * 2) + (side3 * 2) + minSide;
+        result1 += side1 * 2 + side2 * 2 + side3 * 2 + minSide;
         int smallestPar = Math.Min(2 * (h + l), Math.Min(2 * (h + w), 2 * (w + l)));
         int cubic = h * l * w;
         result2 += smallestPar + cubic;

@@ -4,7 +4,7 @@ namespace AOC2024;
 
 public class Day1
 {
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     var data = SetupInputFile.OpenFile(input);
     long resultPart1 = 0, resultPart2 = 0;

@@ -11,7 +11,7 @@ public class Day15
   private static readonly Queue<char> Moves = new();
   private static string movestring;
 
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     long result1 = 0;
     long result2 = 0;

@@ -2,13 +2,10 @@ using Utility;
 
 namespace AOC2024;
 
-public class Day10
+public  class Day10
 {
-
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
-    long resultPart1 = 0;
-    long resultPart2 = 0;
     // Load and parse input data
     string[] data = SetupInputFile.OpenFile(input).ToArray();
 
@@ -24,13 +21,13 @@ public class Day10
       }
     }
 
-    resultPart1 = processGridPart1(grid, rowSize, colSize);
-    resultPart2 = processGridPart2(grid, rowSize, colSize);
+    long resultPart1 = ProcessGridPart1(grid, rowSize, colSize);
+    long resultPart2 = ProcessGridPart2(grid, rowSize, colSize);
     return (resultPart1.ToString(), resultPart2.ToString());
 
 
   }
-  private static long processGridPart1(char[,] grid, int rowSize, int colSize)
+  private static long ProcessGridPart1(char[,] grid, int rowSize, int colSize)
   {
     var trailheads = new List<(int, int)>();
     long totalScore = 0;
@@ -59,14 +56,14 @@ public class Day10
     {
       var visited = new HashSet<(int, int)>(); // Track visited cells
       var reachableNines = new HashSet<(int, int)>(); // Track reachable 9s
-      DFS(grid, trailhead.Item1, trailhead.Item2, visited, reachableNines, directions);
+      Dfs(grid, trailhead.Item1, trailhead.Item2, visited, reachableNines, directions);
       totalScore += reachableNines.Count; // Add the score for this trailhead
     }
 
     return totalScore;
   }
 
-  private static void DFS(char[,] grid,
+  private static void Dfs(char[,] grid,
     int row,
     int col,
     HashSet<(int, int)> visited,
@@ -95,7 +92,7 @@ public class Day10
 
       if (IsValidMove(grid, newRow, newCol, row, col))
       {
-        DFS(grid, newRow, newCol, visited, reachableNines, directions);
+        Dfs(grid, newRow, newCol, visited, reachableNines, directions);
       }
     }
   }
@@ -115,7 +112,7 @@ public class Day10
 
     return newHeight == currentHeight + 1;
   }
-  private static long processGridPart2(char[,] grid, int rowSize, int colSize)
+  private static long ProcessGridPart2(char[,] grid, int rowSize, int colSize)
   {
     var trailheads = new List<(int, int)>();
     long totalRating = 0;

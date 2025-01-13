@@ -12,7 +12,7 @@ public class Day16
   private static readonly Dictionary<(Coordinate2D, CompassDirection), int> seen = new();
   private static readonly Dictionary<long, List<Coordinate2D>> Routes = new();
 
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     string? data = File.ReadAllText(input);
     long result1 = 0;

@@ -9,8 +9,16 @@ public class Day17
   private static long _registerC;
   private static List<int> _commandList = [];
   private static long _result2;
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
+    if (input.Contains("Example"))
+    {
+      _commandList = [];
+      _registerA = 21539243;
+      _registerB = 0;
+      _registerC = 0;
+    }
+
     long result1 = -1;
 
     const string progStr = "2,4,1,3,7,5,1,5,0,3,4,1,5,5,3,0";

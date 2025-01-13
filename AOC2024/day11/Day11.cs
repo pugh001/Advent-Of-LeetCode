@@ -6,7 +6,7 @@ public class Day11
 {
   private static readonly Dictionary<(long, int), long> Blinks = new();
 
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     string data = SetupInputFile.OpenFile(input).First();
     var stones = data.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(long.Parse).ToList();

@@ -16,7 +16,7 @@ public class Day12
 
   private static readonly string DirectionList = "RDLU";
 
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     string[] data = SetupInputFile.OpenFile(input).ToArray();
     if (data.Length == 0)

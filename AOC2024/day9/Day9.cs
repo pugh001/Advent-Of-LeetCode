@@ -4,7 +4,7 @@ namespace AOC2024;
 
 public class Day9
 {
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     // Load and parse input data
     var data = SetupInputFile.OpenFile(input);

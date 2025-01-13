@@ -25,7 +25,7 @@ public class Day4
   ];
 
   private static int[,]? _gridA;
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     long resultPart1 = 0;
     long resultPart2 = 0;

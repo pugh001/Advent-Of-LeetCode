@@ -21,7 +21,7 @@ public class Day18
     (-1, 0) // Up
   ];
 
-  public static (string, string) Process(string input)
+  public (string, string) Process(string input)
   {
     if (input.Contains("Example"))
     {
