@@ -11,7 +11,6 @@ public class Day22
     int[] data = SetupInputFile.OpenFile(input).Select(int.Parse).ToArray();
 
 
-
     var bigNumbers = new Dictionary<int, List<int>>();
     var lastDigits = new Dictionary<int, List<int>>();
     var diff = new Dictionary<int, List<int>>();
@@ -43,7 +42,7 @@ public class Day22
       var firstOccurences = new HashSet<int>();
       for (int i = 4; i <= 2000; i++)
       {
-       
+
         int value = lastDigits[line][i - 1];
         int hash = GetSequenceHash(diff[line].GetRange(i - 4, 4));
 
@@ -66,13 +65,11 @@ public class Day22
     // **Precompute banana counts**
     var bananaCounts = AggregateBananaCounts(sequences);
 
-    var countOfBananaSequence = bananaCounts
-      .OrderByDescending(x => x.Value)
-      .ToList();
+    var countOfBananaSequence = bananaCounts.OrderByDescending(x => x.Value).ToList();
 
     long result = countOfBananaSequence.Max(x => x.Value);
 
-    
+
     return ($"{result1}", $"{result}");
 
   }
@@ -90,6 +87,7 @@ public class Day22
           bananaCounts[key] = value;
       }
     }
+
     return bananaCounts;
   }
 
@@ -101,7 +99,7 @@ public class Day22
     secretKey = Prune(Mix(step2, Multiply(step2, 2048)));
     return secretKey;
   }
-  
+
   private static long Divide32(long value)
   {
     return value / 32;
@@ -126,10 +124,11 @@ public class Day22
     unchecked
     {
       int hash = 17;
-      foreach (var num in sequence)
+      foreach (int num in sequence)
       {
         hash = hash * 31 + num;
       }
+
       return hash;
     }
   }

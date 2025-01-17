@@ -2,7 +2,7 @@ using Utility;
 
 namespace AOC2024;
 
-public  class Day10
+public class Day10
 {
   public (string, string) Process(string input)
   {

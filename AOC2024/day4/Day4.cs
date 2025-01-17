@@ -4,26 +4,6 @@ namespace AOC2024;
 
 public class Day4
 {
-  private static readonly int[][] Directions =
-  [
-    [0, 1], // Right
-    [1, 0], // Down
-    [0, -1], // Left
-    [-1, 0], // Up
-    [1, 1], // Down-right (Diagonal)
-    [1, -1], // Down-left (Diagonal)
-    [-1, 1], // Up-right (Diagonal)
-    [-1, -1] // Up-left (Diagonal)
-  ];
-
-  private static readonly int[][] Directions2 =
-  [
-    [1, 1], // Down-right (Diagonal)
-    [1, -1], // Down-left (Diagonal)
-    [-1, 1], // Up-right (Diagonal)
-    [-1, -1] // Up-left (Diagonal)
-  ];
-
   private static int[,]? _gridA;
   public (string, string) Process(string input)
   {
@@ -62,7 +42,7 @@ public class Day4
     {
       for (int c = 0; c < colSize; c++)
       {
-        foreach (int[] direction in Directions)
+        foreach (int[] direction in Directions.allDirections)
         {
           if (FoundWord(grid, r, c, direction[0], direction[1], "XMAS"))
           {
@@ -81,7 +61,7 @@ public class Day4
     {
       for (int c = 0; c < colSize; c++)
       {
-        foreach (int[] direction in Directions2)
+        foreach (int[] direction in Directions.diagonals)
         {
           FoundWord(grid, r, c, direction[0], direction[1], "MAS");
 

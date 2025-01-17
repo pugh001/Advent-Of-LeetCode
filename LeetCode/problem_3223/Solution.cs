@@ -13,7 +13,7 @@ public class Solution
     int expected = 5;
 
     // Act
-    var result = solution.MinimumLength(s);
+    int result = solution.MinimumLength(s);
 
     // Assert
     Assert.Equal(expected, result);
@@ -28,7 +28,7 @@ public class Solution
     int expected = 2;
 
     // Act
-    var result = solution.MinimumLength(s);
+    int result = solution.MinimumLength(s);
 
     // Assert
     Assert.Equal(expected, result);
@@ -49,14 +49,13 @@ public class Solution
     {
       if (freq[index] > 0)
       {
-        result += (freq[index] % 2 == 0 ?
+        result += freq[index] % 2 == 0 ?
           2 :
-          1);
+          1;
       }
     }
 
     return result;
 
   }
-
 }

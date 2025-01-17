@@ -1,20 +1,16 @@
-using System.Numerics;
-using Utility;
-
 namespace AOC2024;
 
 public class Day21
 {
   private static string[] _input;
-  private static Dictionary<long, long> seenMoves = new Dictionary<long, long>();
-  private static Queue<(int x, int y, string moves)> playerMoves = new Queue<(int x, int y, string moves)>();
+  private static readonly Dictionary<long, long> seenMoves = new();
+  private static readonly Queue<(int x, int y, string moves)> playerMoves = new();
   private static char[][] Keypad;
   private static char[][] BotPad;
 
   public (string, string) Process(string input)
   {
 
-   
 
     _input = File.ReadAllLines(input);
     Keypad = new char[4][];
@@ -50,7 +46,7 @@ public class Day21
 
   private static long LowestCostPad(int curx, int cury, int targetx, int targety, int numPads)
   {
-    long seen = (((((curx * 3) + cury) * 3 + targetx) * 3 + targety) * 25) + numPads;
+    long seen = (((curx * 3 + cury) * 3 + targetx) * 3 + targety) * 25 + numPads;
 
     if (seenMoves.ContainsKey(seen)) return seenMoves[seen];
 
@@ -95,7 +91,7 @@ public class Day21
 
     for (int j = 0; j < moves.Length; j++)
     {
-      var seen = false;
+      bool seen = false;
       for (int nextx = 0; nextx < 2; nextx++)
       {
         for (int nexty = 0; nexty < 3; nexty++)
@@ -150,7 +146,7 @@ public class Day21
   private static string ProcessKeypad(int numPads)
   {
     long sum = 0;
-    foreach (var line in _input)
+    foreach (string? line in _input)
     {
       long res = 0;
       int startx = 3;
@@ -158,7 +154,7 @@ public class Day21
 
       foreach (char c in line)
       {
-        var seen = false;
+        bool seen = false;
         for (int nextx = 0; nextx < 4; nextx++)
         {
           for (int nexty = 0; nexty < 3; nexty++)
@@ -186,7 +182,7 @@ public class Day21
   private string ProcessBotPad(int numPads)
   {
     long sum = 0;
-    foreach (var line in _input)
+    foreach (string? line in _input)
     {
       long res = 0;
       int startx = 3;
@@ -194,7 +190,7 @@ public class Day21
 
       foreach (char c in line)
       {
-        var seen = false;
+        bool seen = false;
         for (int nextx = 0; nextx < 4; nextx++)
         {
           for (int nexty = 0; nexty < 3; nexty++)
@@ -218,7 +214,4 @@ public class Day21
 
     return $"{sum}";
   }
-
-
 }
-

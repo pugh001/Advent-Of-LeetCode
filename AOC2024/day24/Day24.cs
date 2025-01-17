@@ -7,14 +7,14 @@ public class Day24
   private static readonly List<string> instructions = new();
   private static readonly Dictionary<string, int> registers = new();
 
-  private static HashSet<(string x, string y, string type, string output)> gates = [];
+  private static readonly HashSet<(string x, string y, string type, string output)> gates = [];
   private static readonly HashSet<string> PossibleSwaps = [];
 
   public (string, string) Process(string input)
   {
     var data = SetupInputFile.OpenFile(input);
     bool isLoadRegister = true;
-    foreach (var line in data)
+    foreach (string? line in data)
     {
       if (line.Trim() == "")
       {
@@ -24,20 +24,20 @@ public class Day24
 
       if (isLoadRegister)
       {
-        var reg = line.Split(':', StringSplitOptions.TrimEntries);
+        string[]? reg = line.Split(':', StringSplitOptions.TrimEntries);
         registers[reg[0]] = int.Parse(reg[1]);
         continue;
       }
 
-      var split = line.Split("->");
-      var terms = split[0].Split(" ");
+      string[]? split = line.Split("->");
+      string[]? terms = split[0].Split(" ");
       gates.Add((terms[0], terms[2], terms[1], split[1].Trim()));
 
       instructions.Add(line);
     }
 
-    var result1 = ProcessLogic();
-    var result2 = CheckPossibleSwaps();
+    string? result1 = ProcessLogic();
+    string? result2 = CheckPossibleSwaps();
     return (result1, result2);
   }
   private static string ProcessLogic()
@@ -46,15 +46,15 @@ public class Day24
 
     while (processed.Count < instructions.Count)
     {
-      foreach (var instruction in instructions)
+      foreach (string? instruction in instructions)
       {
         if (processed.Contains(instruction)) continue;
 
-        var parts = instruction.Split(new[] { " -> " }, StringSplitOptions.RemoveEmptyEntries);
+        string[]? parts = instruction.Split(new[] { " -> " }, StringSplitOptions.RemoveEmptyEntries);
         if (parts.Length != 2) continue;
 
-        var expression = parts[0].Trim();
-        var result = parts[1].Trim();
+        string? expression = parts[0].Trim();
+        string? result = parts[1].Trim();
 
         // Parse and evaluate the expression
         if (EvaluateExpression(expression, result))
@@ -79,10 +79,10 @@ public class Day24
     return $"{decimalValue}";
   }
 
-  static bool EvaluateExpression(string expression, string result)
+  private static bool EvaluateExpression(string expression, string result)
   {
     int value = 0;
-    var tokens = expression.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+    string[]? tokens = expression.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
     string op1 = tokens[0], op = tokens[1], op2 = tokens[2];
     if (!registers.TryGetValue(op1, out int val1) && !int.TryParse(op1, out val1)) return false;
@@ -138,7 +138,7 @@ public class Day24
         }
 
         xorgate = FindOutput(firstcheck, firstgate, "XOR");
-          
+
         if (firstgate.StartsWith('z'))
         {
           (firstgate, xorgate) = (xorgate, firstgate);
@@ -166,7 +166,7 @@ public class Day24
         orgate = FindOutput(andgate, secondgate, "OR");
       }
 
-      if (orgate.StartsWith('z') == true && orgate != lastZ)
+      if (orgate.StartsWith('z') && orgate != lastZ)
       {
         (orgate, xorgate) = (xorgate, orgate);
         PossibleSwaps.Add(orgate);
@@ -184,7 +184,7 @@ public class Day24
   private static string FindOutput(string a, string b, string operatorType)
   {
     return gates.FirstOrDefault(gate
-        => (gate.x == a && gate.y == b && gate.type == operatorType) || (gate.x == b && gate.y == a && gate.type == operatorType))
+        => gate.x == a && gate.y == b && gate.type == operatorType || gate.x == b && gate.y == a && gate.type == operatorType)
       .output;
   }
 }

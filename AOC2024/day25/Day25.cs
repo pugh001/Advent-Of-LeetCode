@@ -4,8 +4,8 @@ namespace AOC2024;
 
 public class Day25
 {
-  private List<List<int>> keys = new List<List<int>>();
-  private List<List<int>> locks = new List<List<int>>();
+  private readonly List<List<int>> keys = new();
+  private readonly List<List<int>> locks = new();
 
   public (string, string) Process(string input)
   {
@@ -17,10 +17,10 @@ public class Day25
   private void ParseData(IEnumerable<string> data)
   {
     int loadLine = 0;
-    List<int> pins = InitializePins();
+    var pins = InitializePins();
     bool isKey = false;
 
-    foreach (var line in data)
+    foreach (string? line in data)
     {
       if (string.IsNullOrWhiteSpace(line))
       {

@@ -85,57 +85,10 @@ public class Day5
 
   private static List<int> FixOrdering(List<int> update, List<(int X, int Y)> rules)
   {
-    var graph = BuildGraph(update, rules);
-    return TopologicalSort(graph, update);
+    var graph = Graph.BuildGraph(update, rules);
+    return Graph.TopologicalSort(graph, update);
   }
 
-  private static Dictionary<int, List<int>> BuildGraph(List<int> update, List<(int X, int Y)> rules)
-  {
-    var graph = update.ToDictionary(page => page, page => new List<int>());
-
-    foreach ((int X, int Y) in rules)
-    {
-      if (graph.ContainsKey(X) && graph.ContainsKey(Y))
-      {
-        graph[X].Add(Y);
-      }
-    }
-
-    return graph;
-  }
-
-  private static List<int> TopologicalSort(Dictionary<int, List<int>> graph, List<int> nodes)
-  {
-    var inDegree = graph.ToDictionary(kvp => kvp.Key, kvp => 0);
-
-    foreach (var neighbors in graph.Values)
-    {
-      foreach (int neighbor in neighbors)
-      {
-        inDegree[neighbor]++;
-      }
-    }
-
-    var queue = new Queue<int>(nodes.Where(node => inDegree[node] == 0));
-    var sorted = new List<int>();
-
-    while (queue.Count > 0)
-    {
-      int current = queue.Dequeue();
-      sorted.Add(current);
-
-      foreach (int neighbor in graph[current])
-      {
-        inDegree[neighbor]--;
-        if (inDegree[neighbor] == 0)
-        {
-          queue.Enqueue(neighbor);
-        }
-      }
-    }
-
-    return sorted;
-  }
 
   private static int GetMiddleValue(List<int> update)
   {

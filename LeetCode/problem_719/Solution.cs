@@ -18,39 +18,46 @@ public class Solution
     // Assert
     Assert.Equal(expected, result);
   }
-    public int SmallestDistancePair(int[] nums, int k)
+  public int SmallestDistancePair(int[] nums, int k)
+  {
+    Array.Sort(nums);
+
+    int n = nums.Length;
+    int left = 0, right = nums[n - 1] - nums[0];
+
+    // Step 2: Binary search for the k-th smallest distance
+    while (left < right)
     {
-      Array.Sort(nums);
+      int mid = left + (right - left) / 2;
+      if (CountPairs(mid, n, nums) >= k)
+      {
+        right = mid;
+      }
+      else
+      {
+        left = mid + 1;
+      }
+    }
 
-      int n = nums.Length;
-      int left = 0, right = nums[n - 1] - nums[0];
+    return left;
 
-      // Step 2: Binary search for the k-th smallest distance
-      while (left < right) {
-        int mid = left + (right - left) / 2;
-        if (CountPairs(mid, n, nums) >= k) {
-          right = mid;
-        } else {
-          left = mid + 1;
-        }
+    // Helper function to count pairs with distance <= mid
+  }
+  private int CountPairs(int mid, int n, int[] nums)
+  {
+    int count = 0;
+    int j = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+      while (j < n && nums[j] - nums[i] <= mid)
+      {
+        j++;
       }
 
-      return left;
-
-      // Helper function to count pairs with distance <= mid
+      count += j - i - 1;
     }
-    private int CountPairs(int mid, int n, int[] nums)
-    {
-      int count = 0;
-      int j = 0;
 
-      for (int i = 0; i < n; i++) {
-        while (j < n && nums[j] - nums[i] <= mid) {
-          j++;
-        }
-        count += (j - i - 1);
-      }
-
-      return count;
-    }
+    return count;
+  }
 }

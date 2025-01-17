@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Utility;
 
 namespace AOC2024;
@@ -38,7 +37,7 @@ static internal class Program
         var stopWatch = Stopwatch.StartNew();
 
         // Invoke the Process method on the instance
-        var result = processMethod.Invoke(dayInstance, new object[] { inputFilePath });
+        object? result = processMethod.Invoke(dayInstance, new object[] { inputFilePath });
 
         stopWatch.Stop();
 
