@@ -1,4 +1,3 @@
-using System.Numerics;
 using Xunit;
 
 namespace LeetCode.problem_2683;
@@ -57,12 +56,12 @@ public class Solution
   public bool DoesValidArrayExist(int[] derived)
   {
     /*
-     If you take the examples and xor each value in array with next it seems that when result 
+     If you take the examples and xor each value in array with next it seems that when result
      is 0 there is a solution but when 1 not.
      so the LINQ is same as a loop for each and then do this
          xorDerived = xorDerived ^ array element value
      Start at 0 so first value is same as initial.
-     Bitwise XOR 
+     Bitwise XOR
      1 ^ 1 = 0
      0 ^ 0 = 0
      1 ^ 0 = 1
@@ -72,5 +71,4 @@ public class Solution
     xorDerived = derived.Aggregate(xorDerived, (current, i) => current ^ i);
     return xorDerived == 0;
   }
-
 }
