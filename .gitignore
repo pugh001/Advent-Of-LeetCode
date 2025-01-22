@@ -36,3 +36,6 @@ obj/
 Source/*/puzzleInput.txt
 puzzleInput.txt
 **/bin/
+/SpeedTestingApp/*
+/AOC2024/day20/*
+SolutionOfCode.sln.DotSettings.user
